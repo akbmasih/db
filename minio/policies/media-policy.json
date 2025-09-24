@@ -1,0 +1,71 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+      "Resource": ["arn:aws:s3:::lingudesk-media"]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::lingudesk-media/*"],
+      "Condition": {
+        "StringLike": {
+          "aws:Referer": ["https://lingudesk.com/*"]
+        },
+        "IpAddress": {
+          "aws:SourceIp": ["10.0.0.0/24"]
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["arn:aws:iam::*:user/content_service"]
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:GetObject"
+      ],
+      "Resource": ["arn:aws:s3:::lingudesk-media/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": ["arn:aws:iam::*:user/ai_service"]
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject"
+      ],
+      "Resource": ["arn:aws:s3:::lingudesk-ai-cache/*"]
+    },
+    {
+      "Effect": "Deny",
+      "Principal": {
+        "AWS": ["*"]
+      },
+      "Action": ["s3:*"],
+      "Resource": [
+        "arn:aws:s3:::lingudesk-media/*",
+        "arn:aws:s3:::lingudesk-ai-cache/*"
+      ],
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "false"
+        }
+      }
+    }
+  ]
+}

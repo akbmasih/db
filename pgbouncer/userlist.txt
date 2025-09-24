@@ -1,0 +1,23 @@
+# /db/pgbouncer/userlist.txt
+# PgBouncer user authentication file
+# Format: "username" "password_md5_hash"
+# Generate MD5: echo -n "passwordusername" | md5sum
+
+# Admin user (password: SecurePass123!)
+"postgres" "md5c5e3b5c5f5e5d5a5b5c5d5e5f5a5b5c5"
+
+# Application user (password: AppPass456!)
+"db_user" "md5a4b3c2d1e5f6a7b8c9d0e1f2a3b4c5d6"
+
+# Monitoring user (password: Monitor789!)
+"monitor" "md5f1e2d3c4b5a6f7e8d9c0b1a2f3e4d5c6"
+
+# Service-specific users
+"auth_service" "md5b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+"credit_service" "md5c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7"
+"ai_service" "md5d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+"content_service" "md5e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
+"backup_service" "md5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0"
+
+# pgbouncer stats user (no password required for SHOW commands)
+"pgbouncer" ""
